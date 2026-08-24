@@ -3,8 +3,7 @@
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import SplitterLayout from "react-splitter-layout";
-import "react-splitter-layout/lib/index.css";
+import { SplitPane } from "react-split-pane";
 
 import ContentSection from "./_components/ContentSection";
 import CodeEditor from "./_components/CodeEditor";
@@ -49,8 +48,8 @@ function Playground() {
   const [courseExerciseData, setCourseExerciseData] =
     useState<CourseExercise>();
   const [exerciseInfo, setExerciseInfo] = useState<Exercise>();
-  const [nextButtonRoute, setNextButtonRoute]=useState<string>();
-  const [prevButtonRoute, setPrevButtonRoute]=useState<string>();
+  const [nextButtonRoute, setNextButtonRoute] = useState<string>();
+  const [prevButtonRoute, setPrevButtonRoute] = useState<string>();
 
 
   useEffect(() => {
@@ -102,15 +101,15 @@ function Playground() {
       courseExerciseData?.exercises[currentExerciseIndex - 1]?.slug;
     // console.log(NextEercise, PrevEercise);
 
-    setNextButtonRoute(NextExercise?`/courses/${courseId}/${chapterId}/${NextExercise}`:undefined);
-    setPrevButtonRoute(PrevExercise?`/courses/${courseId}/${chapterId}/${PrevExercise}`:undefined);
+    setNextButtonRoute(NextExercise ? `/courses/${courseId}/${chapterId}/${NextExercise}` : undefined);
+    setPrevButtonRoute(PrevExercise ? `/courses/${courseId}/${chapterId}/${PrevExercise}` : undefined);
 
 
   };
 
   return (
     <div className="border-t-4">
-      <SplitterLayout percentage primaryMinSize={40} secondaryInitialSize={60}>
+      <SplitPane>
         <div className="flex flex-col h-full min-h-0">
           <div className="flex-1 overflow-y-auto min-h-0 pr-2">
             <ContentSection
@@ -126,7 +125,7 @@ function Playground() {
             loading={loading}
           />
         </div>
-      </SplitterLayout>
+      </SplitPane>
 
       <div className="font-game fixed bottom-0 w-full bg-zinc-900 flex py-2 px-6 justify-between items-center">
         {/* Back to Course */}
@@ -135,22 +134,22 @@ function Playground() {
             Back to Course
           </Button>
         </Link>
-        <Link href={prevButtonRoute??'/courses/'+courseId}>
-        <Button variant={"pixel"} className="text-xl cursor-pointer">
-          Previous
-        </Button>
+        <Link href={prevButtonRoute ?? '/courses/' + courseId}>
+          <Button variant={"pixel"} className="text-xl cursor-pointer">
+            Previous
+          </Button>
         </Link>
-        
+
         <div className="flex gap-3 items-center">
           <Image src="/star.png" alt="star" width={40} height={40} />
           <h2 className="text-2xl">
             You can Earn <span className="text-4xl">{exerciseInfo?.xp ?? 0}</span> XP
           </h2>
         </div>
-        <Link href={nextButtonRoute??'/courses/'+courseId}>
-        <Button variant={"pixel"} className="text-xl cursor-pointer">
-          Next
-        </Button>
+        <Link href={nextButtonRoute ?? '/courses/' + courseId}>
+          <Button variant={"pixel"} className="text-xl cursor-pointer">
+            Next
+          </Button>
         </Link>
       </div>
     </div>

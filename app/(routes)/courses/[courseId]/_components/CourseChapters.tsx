@@ -22,7 +22,6 @@ import {
 
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
-import { exec } from "child_process";
 
 type Props = {
   loading: boolean;

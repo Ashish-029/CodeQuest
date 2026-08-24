@@ -8,8 +8,7 @@ import {
   SandpackPreview,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import SplitPane from "react-split-pane";
-import "react-split-pane/lib/styles.css";
+import{ SplitPane} from "react-split-pane";
 import { CourseExercise } from "../page";
 import { Button } from "@/components/ui/button";
 import { nightOwl } from "@codesandbox/sandpack-themes";
@@ -87,11 +86,7 @@ function CodeEditor({ courseExerciseData }: Props) {
       >
         <SandpackLayout style={{ height: "100%" }}>
           
-          <SplitPane
-            split="vertical"
-            minSize={300}
-            defaultSize="50%"
-          >
+          <SplitPane>
             {/* LEFT: Code Editor */}
             <div className="relative h-full">
               <SandpackCodeEditor
